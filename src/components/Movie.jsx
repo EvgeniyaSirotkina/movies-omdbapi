@@ -4,6 +4,7 @@ function Movie (props) {
         Year: year,
         imdbID: id,
         Poster: poster,
+        Type: type
      } = props;
     
     return (
@@ -18,7 +19,9 @@ function Movie (props) {
             </div>
             <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">{title}</span>
-                <p>Year: {year}</p>
+                <p>
+                    Year: {year} <span className="right">{type}</span>
+                </p>
             </div>
         </div>
     );
