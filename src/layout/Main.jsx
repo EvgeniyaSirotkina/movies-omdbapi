@@ -1,5 +1,6 @@
 import React from "react";
 import { Movies } from '../components/Movies';
+import { Preloader } from '../components/Preloader';
 
 
 class Main extends React.Component {
@@ -27,9 +28,7 @@ class Main extends React.Component {
                 {isLoaded ? (
                     <Movies movies={movies} />
                 ) : (
-                    <div className="progress">
-                        <div className="indeterminate"></div>
-                    </div>
+                    <Preloader />
                 )}
             </main>
         );
