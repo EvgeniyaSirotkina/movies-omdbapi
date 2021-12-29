@@ -9,11 +9,12 @@ class Main extends React.Component {
     state = {
         movies: [],
         isLoaded: false,
-        searchStatment: 'home'
+        searchStatment: 'home',
+        page: 1
     }
 
     componentDidMount() {
-        fetch('http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=1&s=home')
+        fetch(`http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=${this.state.page}&s=home`)
         .then(response => response.json())
         .then(data => {
             if (data.Response === 'True') {
@@ -24,7 +25,7 @@ class Main extends React.Component {
 
     searchMovies = (searchStatment) => {
         this.setState({ searchStatment, isLoaded: false });
-        fetch(`http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=1&s=${searchStatment}`)
+        fetch(`http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=${this.state.page}&s=${searchStatment}`)
         .then(response => response.json())
         .then(data => {
             if (data.Response === 'True') {
@@ -37,8 +38,8 @@ class Main extends React.Component {
         this.setState({ isLoaded: false });
 
         const request =  filter !== 'all' 
-                            ? `http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=1&s=${this.state.searchStatment}&type=${filter}`
-                            : `http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=1&s=${this.state.searchStatment}`;
+                            ? `http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=${this.state.page}&s=${this.state.searchStatment}&type=${filter}`
+                            : `http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=${this.state.page}&s=${this.state.searchStatment}`;
 
         fetch(request)
         .then(response => response.json())
