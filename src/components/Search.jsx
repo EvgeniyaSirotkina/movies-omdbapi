@@ -24,7 +24,7 @@ class Search extends React.Component {
         const { search } = this.state;
 
         return (
-            <div className="nav-wrapper">
+            <div className="nav-wrapper search">
                 <div className="input-field ">
                     <input 
                         id="search" 
