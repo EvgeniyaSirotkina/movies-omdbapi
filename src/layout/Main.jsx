@@ -3,14 +3,17 @@ import { Movies } from '../components/Movies';
 import { Preloader } from '../components/Preloader';
 import { Search } from '../components/Search';
 import { Filter } from '../components/Filter';
-
+import { Pagination } from '../components/Pagination';
+import { NotFound } from '../components/NotFound';
 
 class Main extends React.Component {
     state = {
         movies: [],
         isLoaded: false,
+        errorMessage: undefined,
         searchStatment: 'home',
-        page: 1
+        page: 1,
+        pages: 1,
     }
 
     componentDidMount() {
@@ -51,13 +54,16 @@ class Main extends React.Component {
     }
 
     render() {
-        const { movies, isLoaded } = this.state;
+        const { movies, isLoaded, errorMessage, page, pages } = this.state;
 
         return (
             <main className="container content">
                 <Search searchMovies={this.searchMovies} />
                 <Filter filterMovies={this.filterMovies} />
-                {isLoaded ? (
+                <Pagination currentPage={page} pages={pages} changePage={this.changePage} />
+                {!isLoaded && errorMessage ? (
+                    <NotFound message={errorMessage} />
+                ) : isLoaded && !errorMessage ? (
                     <Movies movies={movies} />
                 ) : (
                     <Preloader />
