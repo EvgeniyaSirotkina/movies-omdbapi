@@ -26,6 +26,6 @@ nav, footer {
   gap: 1rem;
 }
 
-.filter, .search {
+.filter, .search, .pagination-wrapper {
   padding: .75rem 0;
 }
