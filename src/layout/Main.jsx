@@ -55,7 +55,7 @@ class Main extends React.Component {
 
     searchMovies = (searchStatment) => {
         this.setState({ searchStatment, isLoaded: false, page: 1 });
-        fetch(this.generateRequest(searchStatment, this.state.page))
+        fetch(this.generateRequest(searchStatment, this.state.page, this.state.type))
         .then(response => response.json())
         .then(data => {
             if (data.Response === 'True') {
