@@ -20,7 +20,7 @@ class Main extends React.Component {
     }
 
     generateRequest = (searchStatment, page, type) => {
-        let request = `http://www.omdbapi.com/?apikey=${API_KEY}&r=json`;
+        let request = `https://www.omdbapi.com/?apikey=${API_KEY}&r=json`;
 
         if (searchStatment) {
             request += `&s=${searchStatment}`;
