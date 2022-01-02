@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/movies-omdbapi/static/css/main.2bb707a4.css",
-    "main.js": "/movies-omdbapi/static/js/main.2d052e3a.js",
+    "main.js": "/movies-omdbapi/static/js/main.eb8c05c5.js",
     "index.html": "/movies-omdbapi/index.html",
     "main.2bb707a4.css.map": "/movies-omdbapi/static/css/main.2bb707a4.css.map",
-    "main.2d052e3a.js.map": "/movies-omdbapi/static/js/main.2d052e3a.js.map"
+    "main.eb8c05c5.js.map": "/movies-omdbapi/static/js/main.eb8c05c5.js.map"
   },
   "entrypoints": [
     "static/css/main.2bb707a4.css",
-    "static/js/main.2d052e3a.js"
+    "static/js/main.eb8c05c5.js"
   ]
 }
