@@ -107,9 +107,7 @@ class Main extends React.Component {
             <main className="container content">
                 <Search searchMovies={this.searchMovies} />
                 <Filter filterMovies={this.filterMovies} />
-
-                {totalPages && <Pagination currentPage={page} totalPages={totalPages} changePage={this.changePage} />}
-                        
+     
                 {!isLoaded && errorMessage ? (
                     <NotFound message={errorMessage} />
                 ) : isLoaded && !errorMessage ? (
