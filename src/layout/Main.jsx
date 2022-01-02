@@ -6,6 +6,8 @@ import { Filter } from '../components/Filter';
 import { Pagination } from '../components/Pagination';
 import { NotFound } from '../components/NotFound';
 
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 class Main extends React.Component {
     state = {
         movies: [],
@@ -13,54 +15,101 @@ class Main extends React.Component {
         errorMessage: undefined,
         searchStatment: 'home',
         page: 1,
-        pages: 1,
+        totalPages: undefined,
+        type: ''
+    }
+
+    generateRequest = (searchStatment, page, type) => {
+        let request = `http://www.omdbapi.com/?apikey=${API_KEY}&r=json`;
+
+        if (searchStatment) {
+            request += `&s=${searchStatment}`;
+        } else {
+            request += '&s=home';
+        }
+
+        if (page) {
+            request += `&page=${page}`;
+        }
+
+        if (type && type !== 'all') {
+            request += `&type=${type}`;
+        }
+
+        return request;
     }
 
     componentDidMount() {
-        fetch(`http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=${this.state.page}&s=home`)
+        fetch(this.generateRequest())
         .then(response => response.json())
         .then(data => {
             if (data.Response === 'True') {
-                this.setState({ movies: data.Search, isLoaded: true });
+                const totalPages = Math.ceil(data.totalResults / 10);
+                this.setState({ movies: data.Search, errorMessage: undefined, isLoaded: true, totalPages });
+            }
+            if (data.Response === 'False') {
+                this.setState({ movies: [], errorMessage: data.Error, isLoaded: false, totalPages: undefined });
             }
         });
     }
 
     searchMovies = (searchStatment) => {
-        this.setState({ searchStatment, isLoaded: false });
-        fetch(`http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=${this.state.page}&s=${searchStatment}`)
+        this.setState({ searchStatment, isLoaded: false, page: 1 });
+        fetch(this.generateRequest(searchStatment, this.state.page))
         .then(response => response.json())
         .then(data => {
             if (data.Response === 'True') {
-                this.setState({ movies: data.Search, isLoaded: true });
+                const totalPages = Math.ceil(data.totalResults / 10);
+                this.setState({ movies: data.Search, errorMessage: undefined, isLoaded: true, totalPages });
+            }
+            if (data.Response === 'False') {
+                this.setState({ movies: [], errorMessage: data.Error, isLoaded: false, totalPages: undefined });
             }
         });
     }
 
     filterMovies = (filter) => {
-        this.setState({ isLoaded: false });
+        const currentPage = 1;
+        this.setState({ isLoaded: false, page: currentPage, type: filter });
 
-        const request =  filter !== 'all' 
-                            ? `http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=${this.state.page}&s=${this.state.searchStatment}&type=${filter}`
-                            : `http://www.omdbapi.com/?apikey=[YOUR_APIKEY]&r=json&page=${this.state.page}&s=${this.state.searchStatment}`;
-
-        fetch(request)
+        fetch(this.generateRequest(this.state.searchStatment, currentPage, filter))
         .then(response => response.json())
         .then(data => {
             if (data.Response === 'True') {
-                this.setState({ movies: data.Search, isLoaded: true });
+                const totalPages = Math.ceil(data.totalResults / 10);
+                this.setState({ movies: data.Search, errorMessage: undefined, isLoaded: true, totalPages });
+            }
+            if (data.Response === 'False') {
+                this.setState({ movies: [], errorMessage: data.Error, isLoaded: false, totalPages: undefined });
+            }
+        });
+    }
+
+    changePage = (page) => {
+        this.setState({ isLoaded: false, page: page });
+        fetch(this.generateRequest(this.state.searchStatment, page, this.state.type))
+        .then(response => response.json())
+        .then(data => {
+            if (data.Response === 'True') {
+                const totalPages = Math.ceil(data.totalResults / 10);
+                this.setState({ movies: data.Search, errorMessage: undefined, isLoaded: true, totalPages });
+            }
+            if (data.Response === 'False') {
+                this.setState({ movies: [], errorMessage: data.Error, isLoaded: false, totalPages: undefined });
             }
         });
     }
 
     render() {
-        const { movies, isLoaded, errorMessage, page, pages } = this.state;
+        const { movies, isLoaded, errorMessage, page, totalPages } = this.state;
 
         return (
             <main className="container content">
                 <Search searchMovies={this.searchMovies} />
                 <Filter filterMovies={this.filterMovies} />
-                <Pagination currentPage={page} pages={pages} changePage={this.changePage} />
+
+                {totalPages && <Pagination currentPage={page} totalPages={totalPages} changePage={this.changePage} />}
+                        
                 {!isLoaded && errorMessage ? (
                     <NotFound message={errorMessage} />
                 ) : isLoaded && !errorMessage ? (
