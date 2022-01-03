@@ -29,3 +29,9 @@ nav, footer {
 .filter, .search, .pagination-wrapper {
   padding: .75rem 0;
 }
+
+.search-btn {
+  position: absolute;
+  top: 0;
+  right: 0.5rem;
+}
