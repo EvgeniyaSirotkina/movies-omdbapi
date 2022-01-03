@@ -27,6 +27,10 @@ export const Main = () => {
                 setMovies([]);
                 setErrorMessage(data.Error);
             }
+        })
+        .catch(error => {
+            console.log(error);
+            setIsLoaded(false);
         });
     }
 
@@ -43,6 +47,10 @@ export const Main = () => {
                 setMovies([]);
                 setErrorMessage(data.Error);
             }
+        })
+        .catch(error => {
+            console.log(error);
+            setIsLoaded(false);
         });
     }, []);
 
