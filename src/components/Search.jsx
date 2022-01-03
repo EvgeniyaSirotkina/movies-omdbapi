@@ -1,45 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 
-class Search extends React.Component {
-    state = {
-        search: '',
+export const Search = (props) => {
+    const [ search, setSearch ] = useState('');
+    const { searchMovies } = props;
+
+    const handleSearchInput = (event) => {
+        setSearch(event.target.value);
     }
 
-    handleSearchInput = (event) => {
-        this.setState({ search: event.target.value });
-    }
-
-    handleKey = (event) => {
+    const handleKey = (event) => {
         if (event.key === 'Enter') {
-            this.props.searchMovies(this.state.search);
-            this.clearInput();
+            searchMovies(search);
+            clearInput();
         }
     }
 
-    clearInput = () => {
-        this.setState({ search: '' });
+    const handleButton = () => {
+        searchMovies(search);
+        clearInput();
     }
 
-    render () {
-        const { search } = this.state;
+    const clearInput = () => {
+        setSearch('');
+    }
 
-        return (
-            <div className="nav-wrapper search">
-                <div className="input-field ">
-                    <input 
-                        id="search" 
-                        type="search" 
-                        name="search"
-                        value={search}
-                        onChange={this.handleSearchInput}
-                        onKeyDown={this.handleKey}
-                    />
-                    <label className="label-icon" for="search"><i className="material-icons">search</i></label>
-                    <i className="material-icons" onClick={this.clearInput}>close</i>
-                </div>
+    return (
+        <div className="nav-wrapper search row">
+            <div className="input-field ">
+                <input 
+                    id="search" 
+                    type="search" 
+                    name="search"
+                    value={search}
+                    onChange={handleSearchInput}
+                    onKeyDown={handleKey}
+                />
+                <label className="label-icon" for="search"><i className="material-icons">search</i></label>
+                <button className="btn search-btn" onClick={handleButton}>Search</button>
             </div>
-        );
-    }
+        </div>
+    );
 }
-
-export { Search }
