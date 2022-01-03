@@ -8,19 +8,19 @@ function Movie (props) {
      } = props;
     
     return (
-        <div id={id} className="movie card">
-            <div className="card-image waves-effect waves-block waves-light">
+        <div id={id} className='movie card'>
+            <div className='card-image waves-effect waves-block waves-light'>
                 {
                     poster !== 'N/A' 
-                        ? <img className="activator" src={poster} /> 
-                        : <img className="activator" src={`https://dummyimage.com/300x400/000/fff&text=${title}`} />
+                        ? <img className='activator' src={poster} alt={title} /> 
+                        : <img className='activator' src={`https://dummyimage.com/300x400/000/fff&text=${title}`} alt={title} />
                 }
                 
             </div>
-            <div className="card-content">
-                <span className="card-title activator grey-text text-darken-4">{title}</span>
+            <div className='card-content'>
+                <span className='card-title activator grey-text text-darken-4'>{title}</span>
                 <p>
-                    Year: {year} <span className="right">{type}</span>
+                    Year: {year} <span className='right'>{type}</span>
                 </p>
             </div>
         </div>
