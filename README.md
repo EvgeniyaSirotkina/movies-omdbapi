@@ -2,7 +2,7 @@
 
 This project use [OMDb API](https://www.omdbapi.com/).
 
-To run and use this project you need to have a api key. To [generate](https://www.omdbapi.com/apikey.aspx) this api key you need create a Patreon / FREE account.
+To run and use this project you need to have a api key. To [generate](https://www.omdbapi.com/apikey.aspx) this api key you need to create a Patreon / FREE account.
 
 After you get api key you should create in root folder `.env.local` file and add one environment variable: `REACT_APP_API_KEY=[YOUR_APIKEY]`. [Read more](https://create-react-app.dev/docs/adding-custom-environment-variables/) about adding custom environment variables.
 
