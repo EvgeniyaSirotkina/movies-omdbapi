@@ -1,6 +1,18 @@
-# Getting Started with Create React App
+# React Movies App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project use [OMDb API](https://www.omdbapi.com/).
+
+To run and use this project you need to have a api key. To [generate](https://www.omdbapi.com/apikey.aspx) this api key you need to create a Patreon / FREE account.
+
+After you get api key you should create in root folder `.env.local` file and add one environment variable: `REACT_APP_API_KEY=[YOUR_APIKEY]`. [Read more](https://create-react-app.dev/docs/adding-custom-environment-variables/) about adding custom environment variables.
+
+By default searching statment is 'home'.
+
+Link: [React Movies App](https://evgeniyasirotkina.github.io/movies-omdbapi/)
+![изображение](https://user-images.githubusercontent.com/47915167/147977759-4ed89711-8bad-421d-8ff5-852ffcbf81cd.png)
+
+
+--------
 
 ## Available Scripts
 
@@ -13,11 +25,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
